@@ -7,15 +7,10 @@ import numpy as np
 def get_submit_folder():
     """ Check submit details, remove warnings using tf logging warning and make directory
 
-    Parameters
-    ----------
-
-
     Returns
     -------
     str
         path of the created directory
-
     """
     try:
         CONDOR_ID = os.environ['CONDOR_ID']
@@ -29,25 +24,26 @@ def get_submit_folder():
     return folder
 
 
-def load_data(type):
+def load_data(type, data):
     """ Load toptagging data
 
     Parameters
     ----------
     type : str
         Which dataset should be loaded: 'images' or '4vectors'?
+    data : str
+        Which dataset should be loaded: 'test' or 'train'?
 
     Returns
     -------
     np.array, np.array
         tuple of images, labels
-
     """
     path = "/net/scratch/deeplearning/toptagging/"
     if type == "images":
-        file = np.load(path + "images.npz")
+        file = np.load(path + "images_" + data + ".npz")
     elif type == "4vectors":
-        file = np.load(path + "vectors.npz")
+        file = np.load(path + "vectors_" + data + ".npz")
     else:
         raise AssertionError("type should be 'images or '4vectors'")
 

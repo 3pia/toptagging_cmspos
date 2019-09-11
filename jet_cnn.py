@@ -13,7 +13,7 @@ folder = utils.get_submit_folder()  # do not remove this line!
 # ---------------------------------------------------------
 # Load and plot data
 # ---------------------------------------------------------
-images, labels = utils.load_data(type='images')  # load data
+images, labels = utils.load_data(type='images', data='train')  # load data
 print("shape of images", images.shape)
 print("shape of labels", labels.shape)
 
@@ -71,3 +71,14 @@ ax.plot(history['epoch'], history['val_acc'], label='validation')
 ax.legend()
 ax.set(xlabel='epoch', ylabel='acc')
 fig.savefig(folder+'/acc.png')
+
+images_test, truth = utils.load_data(type='images', data='test')  # load test data
+truth_top = truth.astype(np.bool)
+predictions = model.predict(images_test)
+fig, ax = plt.subplots(1)
+ax.hist(predictions[:, 1][~truth_top], label='qcd', alpha=0.6, bins=np.linspace(0, 1, 40))
+ax.hist(predictions[:, 1][truth_top], label='top', alpha=0.6, bins=np.linspace(0, 1, 40))
+ax.set_xlim(0, 1)
+ax.legend()
+ax.set(xlabel='output', ylabel='#')
+fig.savefig(folder+'/discrimination.png')
