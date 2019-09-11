@@ -14,6 +14,7 @@ folder = utils.get_submit_folder()  # do not remove this line!
 # Load and plot data
 # ---------------------------------------------------------
 images, labels = utils.load_data(type='images', data='train')  # load data
+# utils.plot_average_images(images, labels, folder)
 print("shape of images", images.shape)
 print("shape of labels", labels.shape)
 
