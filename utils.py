@@ -18,7 +18,7 @@ def get_submit_folder():
         CONDOR_ID = os.environ['CONDOR_ID']
     except KeyError:
         sys.exit('Error: Run this script with "pygpu %file"')
-    tf.logging.set_verbosity(tf.logging.ERROR)
+    tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
     folder = 'train-CNN-%s' % CONDOR_ID  # folder for training results
     os.makedirs(folder)
