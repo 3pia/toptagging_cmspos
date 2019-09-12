@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
 
 
-def get_submit_folder():
+def get_submit_folder(name):
     """ Check submit details, remove warnings using tf logging warning and make directory
 
     Returns
@@ -20,7 +20,7 @@ def get_submit_folder():
         sys.exit('Error: Run this script with "pygpu %file"')
     tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
-    folder = 'train-CNN-%s' % CONDOR_ID  # folder for training results
+    folder = 'train-%s-%s' % (name, CONDOR_ID)  # folder for training results
     os.makedirs(folder)
 
     return folder
