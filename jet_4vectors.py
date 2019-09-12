@@ -15,24 +15,16 @@ folder = utils.get_submit_folder()  # do not remove this line!
 jets, labels = utils.load_data(type='4vectors', data='train')  # load data
 print("shape of images", jets.shape)
 print("shape of labels", labels.shape)
-jets = jets / np.max(jets, axis=(0, 1), keepdims=True)
 
-jets = jets[..., np.newaxis]
 # ---------------------------------------------------------
 # Build your model
 # ---------------------------------------------------------
-inp = layers.Input(shape=(200, 4, 1))
-y = layers.Convolution2D(8, (3, 4), activation='relu', padding='valid')(inp)
-y = layers.Convolution2D(16, (5, 1), activation='relu', padding='valid')(y)
-y = layers.Convolution2D(32, (5, 1), activation='relu', padding='valid')(y)
+inp = layers.Input(shape=(200, 6, 1))
+y = layers.Convolution2D(8, (3, 6), activation='relu', padding='valid')(inp)
+y = layers.Convolution2D(16, (3, 1), activation='relu', padding='valid')(y)
 y = layers.MaxPooling2D((3, 1))(y)
-y = layers.Convolution2D(32, (5, 1), activation='elu', padding='same')(y)
-y = layers.Convolution2D(32, (5, 1), activation='elu', padding='same')(y)
-y = layers.MaxPooling2D((3, 1))(y)
-y = layers.Convolution2D(64, (5, 1), activation='elu', padding='same')(y)
-y = layers.Convolution2D(64, (5, 1), activation='elu', padding='same')(y)
+y = layers.Convolution2D(32, (3, 1), activation='relu', padding='valid')(y)
 y = layers.Flatten()(y)
-y = layers.Dropout(0.3)(y)
 y = layers.Dense(2, activation="softmax")(y)
 
 model = keras.models.Model(inputs=inp, outputs=y)
