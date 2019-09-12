@@ -7,7 +7,7 @@ layers = keras.layers
 # ---------------------------------------------------------
 # Boilerplate. You can ignore this part.
 # ---------------------------------------------------------
-folder = utils.get_submit_folder()  # do not remove this line!
+folder = utils.get_submit_folder("4vectors")  # do not remove this line!
 
 # ---------------------------------------------------------
 # Load and plot data
